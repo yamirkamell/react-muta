@@ -4,13 +4,41 @@ import {
   ContainerLeft,
   LogoImg,
   LogoImgResponsive,
+  ContainerMenu,
   ContainerMenuItems,
+  ContainerItems,
+  IconsMenu,
   ContainerMenuName,
   MenuTextItems,
   ContainerRight,
+  ContainerHeader,
+  TitleComponent,
+  ContainerSubtitle,
+  SubTitleComponent,
   FilterText,
   Divider,
   DividerVertical,
+  ContainerEmptyText,
+  TitleEmpty,
+  SubTitleEmpty,
+  ContainerFilter,
+  ContainerFilterItems,
+  TextSearch,
+  InputComponent,
+  IconSearch,
+  IconFilter,
+  ContainerButton,
+  ButtonComponent,
+  IconButton,
+  ContainerTitles,
+  ContainerTableTitles,
+  CheckboxComponent,
+  TextComponent,
+  ContainerFooter,
+  TextFooter,
+  SpanFooter,
+  IconFooter,
+
 } from './styled';
 import mutaLogo from '../../assets/menu/logo.png';
 import mutaLogoResponsive from '../../assets/menu/logoResponsive.png';
@@ -26,89 +54,103 @@ import addIcon from '../../assets/filter/add.png';
 import filterIcon from '../../assets/filter/filter.png';
 import gridIcon from '../../assets/filter/grid.png';
 import searchIcon from '../../assets/filter/search.png';
+import EntryComponent from './EntryComponent';
+import useModal from './../../hooks/useModal';
+import ModalComponent from './ModalComponent';
 
 const Dashboard = () => {
+  const { isShowing, toggle } = useModal();
+
 
   return (
     <ContainerRoot>
       <ContainerLeft>
-        <div>
+        <ContainerMenu>
           <LogoImg src={mutaLogo} />
           <LogoImgResponsive src={mutaLogoResponsive} />
-          <div style={{ marginTop: 80 }}>
-            <ContainerMenuItems>
-              <img src={usersIcon} />
+          <ContainerMenuItems>
+            <ContainerItems>
+              <IconsMenu src={usersIcon} />
               <MenuTextItems>Usuarios</MenuTextItems>
-            </ContainerMenuItems>
-            <ContainerMenuItems>
-              <img src={trashIcon} />
+            </ContainerItems>
+            <ContainerItems>
+              <IconsMenu src={trashIcon} />
               <MenuTextItems>Recolecciones</MenuTextItems>
-            </ContainerMenuItems>
-            <ContainerMenuItems style={{ backgroundColor: '#F1F7F9', borderRadius: 8 }}>
-              <img src={truckIcon} />
+            </ContainerItems>
+            <ContainerItems style={{ backgroundColor: '#F1F7F9', borderRadius: 8 }}>
+              <IconsMenu src={truckIcon} />
               <MenuTextItems>Entradas ACU</MenuTextItems>
-            </ContainerMenuItems>
-            <ContainerMenuItems>
-              <img src={configIcon} />
+            </ContainerItems>
+            <ContainerItems>
+              <IconsMenu src={configIcon} />
               <MenuTextItems>Configurar</MenuTextItems>
-            </ContainerMenuItems>
-            <ContainerMenuItems>
-              <img src={helpIcon} />
+            </ContainerItems>
+            <ContainerItems>
+              <IconsMenu src={helpIcon} />
               <MenuTextItems>Ayuda</MenuTextItems>
-            </ContainerMenuItems>
-          </div>
-        </div>
-        <ContainerMenuName style={{ backgroundColor: '#F1F7F9', borderRadius: 23 }}>
-          <img src={avatarIcon} />
-          <MenuTextItems> Sebastian Ferreira</MenuTextItems>
+            </ContainerItems>
+          </ContainerMenuItems>
+        </ContainerMenu>
+        <ContainerMenuName>
+          <IconsMenu src={avatarIcon} />
+          <MenuTextItems>Sebastian Ferreira</MenuTextItems>
         </ContainerMenuName>
       </ContainerLeft>
       <ContainerRight>
-        <div>
-          <h1>Recolecciones</h1>
-          <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', width: 125, marginTop: 50 }}>
-            <h3>Hoy</h3>
-            <h3 style={{ color: '#9E9E9E' }}>Todas</h3>
-          </div>
+        <ContainerHeader>
+          <TitleComponent>Recolecciones</TitleComponent>
+          <ContainerSubtitle>
+            <SubTitleComponent>Hoy</SubTitleComponent>
+            <SubTitleComponent style={{ color: '#9E9E9E' }}>Todas</SubTitleComponent>
+          </ContainerSubtitle>
           <Divider />
-          <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
-            <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
-              <h5>Buscar</h5>
-              <input style={{
-                height: 20, backgroundColor: '#E0E0E0', border: '1px solid #F5F5F5',
-                borderRadius: 3, padding: '5px 0px 5px 10px', marginLeft: 10
-              }} placeholder='Ingresa un ID' />
-              <img src={searchIcon} style={{ marginLeft: -25, marginRight: 10 }} />
-
+          <ContainerFilter>
+            <ContainerFilterItems>
+              <TextSearch>Buscar</TextSearch>
+              <InputComponent placeholder='Ingresa un ID' />
+              <IconSearch src={searchIcon} />
               <DividerVertical />
               <FilterText>Filtrar</FilterText>
-              <img src={filterIcon} style={{ marginLeft: 10 }} />
+              <IconFilter src={filterIcon} />
               <DividerVertical />
               <FilterText>Organizar</FilterText>
-              <img src={gridIcon} style={{ marginLeft: 10 }} />
-
+              <IconFilter src={gridIcon} />
               <DividerVertical />
-            </div>
-            <div>
-              <button style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', height: 36, backgroundColor: '#EBB36B', borderRadius: 4, border: 'none', color: 'white' }}>
+            </ContainerFilterItems>
+            <ContainerButton>
+              <ButtonComponent onClick={() => { toggle() }}>
                 <FilterText>NUEVA ENTRADA</FilterText>
-                <img src={addIcon} style={{ marginLeft: 10, marginRight: 5 }} />
-              </button>
-
-
-            </div>
-          </div>
+                <IconButton src={addIcon} />
+              </ButtonComponent>
+            </ContainerButton>
+          </ContainerFilter>
           <Divider />
-        </div>
-        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', }}>
-          <h1 style={{ textAlign: 'center', color: '#9E9E9E' }}>Parece que aun no haz recoljido algo.</h1>
-          <h3 style={{ textAlign: 'center', color: '#9E9E9E', marginTop: -10 }}>Puedes registrar una recolección haciendo click en el boton de arriba.</h3>
-        </div>
-        <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'flex-end', alignItems: 'center' }}>
-          <h5>Pagina 1 de 1 <span style={{ color: '#E5E5E5' }} > | </span></h5>
-          <img src={leftIcon} style={{ width: 22, height: 22, marginLeft: 5 }} />
-          <img src={rightIcon} style={{ width: 22, height: 22, marginLeft: 5 }} />
-        </div>
+          <ContainerTitles>
+            <ContainerTableTitles>
+              <CheckboxComponent type="checkbox" />
+              <TextComponent style={{ marginLeft: -60 }}> ID </TextComponent>
+              <TextComponent style={{ marginLeft: -40 }}> Fecha </TextComponent>
+              <TextComponent> Cliente </TextComponent>
+              <TextComponent style={{ marginLeft: -15, marginRight: 40 }}> Estado </TextComponent>
+              <TextComponent> Materiales </TextComponent>
+              <TextComponent> Pago Total </TextComponent>
+            </ContainerTableTitles>
+          </ContainerTitles>
+          <EntryComponent />
+          <ModalComponent
+            isShowing={isShowing}
+            hide={toggle}
+          />
+        </ContainerHeader>
+        <ContainerEmptyText>
+          <TitleEmpty>Parece que aun no haz recoljido algo.</TitleEmpty>
+          <SubTitleEmpty>Puedes registrar una recolección haciendo click en el boton de arriba.</SubTitleEmpty>
+        </ContainerEmptyText>
+        <ContainerFooter>
+          <TextFooter>Pagina 1 de 1 <SpanFooter> | </SpanFooter></TextFooter>
+          <IconFooter src={leftIcon} />
+          <IconFooter src={rightIcon} />
+        </ContainerFooter>
       </ContainerRight>
     </ContainerRoot>
   )
