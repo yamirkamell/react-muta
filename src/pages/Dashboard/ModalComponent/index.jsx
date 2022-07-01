@@ -9,13 +9,19 @@ import {
   TitleComponent,
   CloseButtonComponent,
   ContainerBody,
+  SelectComponent,
   TextComponent,
+  ContainerData,
+  ContainerDataPay,
   TextInput,
+  TextInputTitle,
+  SpanInput,
   InputComponent,
   TextPrice,
   ContainerFooter,
   ButtonSaveComponent,
   ContainerInfoUser,
+  ContainerPay
 } from './styled';
 
 const ModalComponent = ({ isShowing, hide, title, id, userSelected }) => {
@@ -76,53 +82,51 @@ const ModalComponent = ({ isShowing, hide, title, id, userSelected }) => {
             <>
               <ContainerBody>
                 <TextComponent>Cliente</TextComponent>
-                <select style={{ height: 30, border: '1px solid #9E9E9E', borderRadius: 4, padding: '5px 0px 5px 10px', color: '#9E9E9E', marginTop: -15 }}
-                  onChange={event => setIdClient(event.target.value)} >
+                <SelectComponent onChange={event => setIdClient(event.target.value)} >
                   <option value="" disabled selected hidden>Selecciona un cliente...</option>
                   {user.map(item =>
                     <option key={item.id} value={item.id}>{item.cliente}</option>
                   )};
-                </select>
+                </SelectComponent>
                 <div style={{ marginTop: 30 }}>
                   <TextComponent>Recolección</TextComponent>
-                  <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}>
+                  <ContainerData>
                     <TextInput>Aceite Cocina Usado</TextInput>
                     {idClient != 0 ?
                       <InputComponent type='text' defaultValue={itemSelected.acu} onChange={event => setAcu(event.target.value)} />
                       :
                       <InputComponent type='text' defaultValue={acu} onChange={event => setAcu(event.target.value)} />
                     }
-                  </div>
-                  <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}>
+                  </ContainerData>
+                  <ContainerData>
                     <TextInput>Trampa de grasa</TextInput>
                     {idClient != 0 ?
                       <InputComponent type='text' defaultValue={itemSelected.trampa} onChange={event => setTrampa(event.target.value)} />
                       :
                       <InputComponent type='text' defaultValue={trampa} onChange={event => setTrampa(event.target.value)} />
                     }
-                  </div>
-                  <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}>
+                  </ContainerData>
+                  <ContainerData>
                     <TextInput>Pimpina Pasta</TextInput>
                     {idClient != 0 ?
                       <InputComponent type='text' defaultValue={itemSelected.pasta} onChange={event => setPasta(event.target.value)} />
                       :
                       <InputComponent type='text' defaultValue={pasta} onChange={event => setPasta(event.target.value)} />
                     }
-                  </div>
-                  <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}>
+                  </ContainerData>
+                  <ContainerData>
                     <TextInput>Pimpina PET</TextInput>
                     {idClient != 0 ?
                       <InputComponent type='text' defaultValue={itemSelected.pet} onChange={event => setPet(event.target.value)} />
                       :
                       <InputComponent type='text' defaultValue={pet} onChange={event => setPet(event.target.value)} />
                     }
-                  </div>
+                  </ContainerData>
                 </div>
-                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', marginTop: 30 }}>
+                <ContainerDataPay>
                   <TextComponent>Pago</TextComponent>
                   <TextPrice>{idClient != 0 ? itemSelected.pago : ''}</TextPrice>
-
-                </div>
+                </ContainerDataPay>
               </ContainerBody>
               <ContainerFooter>
                 <ButtonSaveComponent disabled={activeButton} onClick={() => { onPressEditUser() }}> Crear</ButtonSaveComponent>
@@ -135,27 +139,27 @@ const ModalComponent = ({ isShowing, hide, title, id, userSelected }) => {
               <TitleComponent style={{ marginTop: -15 }}>{userSelected.cliente}</TitleComponent>
               <div style={{ marginTop: 20 }}>
                 <TextComponent>Material Recolectado</TextComponent>
-                <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}>
-                  <TextInput style={{ marginTop: -10 }}>Aceite Cocina Usado</TextInput>
-                  <span style={{ marginTop: -10 }}> {userSelected.acu} Kg </span>
-                </div>
-                <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}>
-                  <TextInput style={{ marginTop: -10 }}>Trampa de grasa</TextInput>
-                  <span style={{ marginTop: -10 }}> {userSelected.trampa} Kg </span>
-                </div>
-                <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}>
-                  <TextInput style={{ marginTop: -10 }}>Pimpina Pasta</TextInput>
-                  <span style={{ marginTop: -10 }}> {userSelected.pasta} </span>
-                </div>
-                <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}>
-                  <TextInput style={{ marginTop: -10 }}>Pimpina PET</TextInput>
-                  <span style={{ marginTop: -10 }}> {userSelected.pet} </span>
-                </div>
+                <ContainerData>
+                  <TextInputTitle>Aceite Cocina Usado</TextInputTitle>
+                  <SpanInput> {userSelected.acu} Kg </SpanInput>
+                </ContainerData>
+                <ContainerData>
+                  <TextInputTitle>Trampa de grasa</TextInputTitle>
+                  <SpanInput> {userSelected.trampa} Kg </SpanInput>
+                </ContainerData>
+                <ContainerData>
+                  <TextInputTitle>Pimpina Pasta</TextInputTitle>
+                  <SpanInput> {userSelected.pasta} </SpanInput>
+                </ContainerData>
+                <ContainerData>
+                  <TextInputTitle>Pimpina PET</TextInputTitle>
+                  <SpanInput> {userSelected.pet} </SpanInput>
+                </ContainerData>
               </div>
-              <div style={{ display: 'flex', flexDirection: 'column', marginTop: 20 }}>
+              <ContainerPay>
                 <TextComponent>Pago</TextComponent>
                 <TextPrice>{userSelected.pago}</TextPrice>
-              </div>
+              </ContainerPay>
             </ContainerInfoUser>
           }
         </ContainerModal>

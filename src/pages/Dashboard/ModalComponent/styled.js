@@ -52,14 +52,41 @@ const ContainerBody = styled.div`
   flex-direction: column;
   padding: 3px;
 `;
+const SelectComponent = styled.select`
+  height: 30px;
+  border: 1px solid #9E9E9E;
+  border-radius: 4px;
+  padding: 5px 0px 5px 10px; 
+  color: #9E9E9E;
+  margin-top: -15px;
+`;
 const TextComponent = styled.h5`
   color: #9E9E9E;
   margin-top: 5px;
 
 `;
+const ContainerData = styled.div`
+  display: flex;
+  flex-direction: row; 
+  justify-content: space-between;
+`;
+const ContainerDataPay = styled.div`
+  display: flex;
+  flex-direction: column; 
+  align-items: flex-end; 
+  margin-top: 30px;
+`;
 const TextInput = styled.h5`
   color: #616161;
   margin-top: 5px;
+`;
+const TextInputTitle = styled.h5`
+  color: #616161;
+  margin-top: -10px;
+`;
+const SpanInput = styled.span`
+  color: #616161;
+  marginTop: -10px;
 `;
 const InputComponent = styled.input`
   color: #9E9E9E; 
@@ -97,7 +124,11 @@ const ButtonSaveComponent = styled.button`
 const ContainerInfoUser = styled.div`
   display: flex;
   flex-direction: column;
-
+`;
+const ContainerPay = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin-top: 20px;
 `;
 
 
@@ -109,11 +140,17 @@ export {
   TitleComponent,
   CloseButtonComponent,
   ContainerBody,
+  SelectComponent,
   TextComponent,
+  ContainerData,
+  ContainerDataPay,
   TextInput,
+  TextInputTitle,
+  SpanInput,
   InputComponent,
   TextPrice,
   ContainerFooter,
   ButtonSaveComponent,
   ContainerInfoUser,
+  ContainerPay,
 }; 
