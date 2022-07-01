@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { useSelector } from 'react-redux';
 import {
   ContainerRoot,
   ContainerLeft,
@@ -60,7 +61,21 @@ import ModalComponent from './ModalComponent';
 
 const Dashboard = () => {
   const { isShowing, toggle } = useModal();
+  const user = useSelector((state) => state.user);
+  const [title, setTitle] = useState();
+  const [userSelected, setUserSelected] = useState();
 
+  const onPressValidate = (id, item) => {
+    switch (id) {
+      case 1:
+        setTitle('Nueva Entrada');
+        return toggle();
+      default:
+        setTitle('');
+        setUserSelected(item);
+        return toggle();
+    }
+  }
 
   return (
     <ContainerRoot>
@@ -118,7 +133,7 @@ const Dashboard = () => {
               <DividerVertical />
             </ContainerFilterItems>
             <ContainerButton>
-              <ButtonComponent onClick={() => { toggle() }}>
+              <ButtonComponent onClick={() => { onPressValidate(1, 0); }}>
                 <FilterText>NUEVA ENTRADA</FilterText>
                 <IconButton src={addIcon} />
               </ButtonComponent>
@@ -136,16 +151,25 @@ const Dashboard = () => {
               <TextComponent> Pago Total </TextComponent>
             </ContainerTableTitles>
           </ContainerTitles>
-          <EntryComponent />
+          {user?.map((item) => (
+            <div key={item.id} onClick={() => { onPressValidate(item.id, item); }} style={{ cursor: 'pointer' }}>
+              <EntryComponent item={item} />
+            </div>
+          ))}
           <ModalComponent
             isShowing={isShowing}
             hide={toggle}
+            title={title}
+            id={user.length}
+            userSelected={userSelected}
           />
         </ContainerHeader>
-        <ContainerEmptyText>
-          <TitleEmpty>Parece que aun no haz recoljido algo.</TitleEmpty>
-          <SubTitleEmpty>Puedes registrar una recolección haciendo click en el boton de arriba.</SubTitleEmpty>
-        </ContainerEmptyText>
+        {user.length == 0 ?
+          <ContainerEmptyText>
+            <TitleEmpty>Parece que aun no haz recoljido algo.</TitleEmpty>
+            <SubTitleEmpty>Puedes registrar una recolección haciendo click en el boton de arriba.</SubTitleEmpty>
+          </ContainerEmptyText>
+          : null}
         <ContainerFooter>
           <TextFooter>Pagina 1 de 1 <SpanFooter> | </SpanFooter></TextFooter>
           <IconFooter src={leftIcon} />
