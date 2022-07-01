@@ -13,24 +13,26 @@ import {
 } from './styled';
 
 
-const EntryComponent = () => {
+const EntryComponent = (props) => {
+
+  const { item } = props;
 
   return (
     <>
       <ContainerRoot>
         <ContainerEntryData>
           <CheckboxComponent type="checkbox" />
-          <span> 6520 </span>
-          <span> 1 may 2022 </span>
-          <TextComponent> Simon Parrilla </TextComponent>
-          <StateText> Recogido </StateText>
+          <span> {item.id} </span>
+          <span> {item.fecha} </span>
+          <TextComponent> {item.cliente} </TextComponent>
+          <StateText> {item.estado} </StateText>
           <ContainerMaterials>
             <AcuText> ACU </AcuText>
             <PetText> PET </PetText>
             <PastaText> Pasta </PastaText>
             <TrampaText> Trampa </TrampaText>
           </ContainerMaterials>
-          <span> $68.522 </span>
+          <span> {item.pago} </span>
         </ContainerEntryData>
       </ContainerRoot>
     </>

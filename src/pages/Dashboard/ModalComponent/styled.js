@@ -67,7 +67,8 @@ const InputComponent = styled.input`
   height: 30px;
   border-style: solid;
   border-width: 0.1px;
-  border-color: #9E9E9E;  
+  border-color: #9E9E9E; 
+  padding: 0 0 0 3px;
   margin-top: 5px;
   border-radius: 4px;  
 `;
